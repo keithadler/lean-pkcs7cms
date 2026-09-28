@@ -1,0 +1,1063 @@
+{
+ "cases": [
+  {
+   "id": "valid-attached",
+   "what": "control: signed attributes, content inside",
+   "lean_expected": true,
+   "msg": "valid-attached.der"
+  },
+  {
+   "id": "valid-detached",
+   "what": "control: detached signature, content given separately",
+   "lean_expected": true,
+   "msg": "valid-detached.der",
+   "content": "valid-detached.content"
+  },
+  {
+   "id": "valid-noattrs",
+   "what": "control: no signed attributes, signature over the content",
+   "lean_expected": true,
+   "msg": "valid-noattrs.der"
+  },
+  {
+   "id": "valid-ski",
+   "what": "control: signer named by subject key identifier (SignerInfo v3, SignedData v3)",
+   "lean_expected": true,
+   "msg": "valid-ski.der"
+  },
+  {
+   "id": "valid-sha256rsa",
+   "what": "control: signatureAlgorithm sha256WithRSAEncryption",
+   "lean_expected": true,
+   "msg": "valid-sha256rsa.der"
+  },
+  {
+   "id": "valid-digest-null",
+   "what": "control: digestAlgorithm SHA-256 with NULL parameters (RFC 5754 asks verifiers to accept)",
+   "lean_expected": true,
+   "msg": "valid-digest-null.der"
+  },
+  {
+   "id": "attrs-unsorted-signed-as-written",
+   "what": "signed attributes not in DER order, signature over the bytes as written",
+   "lean_expected": false,
+   "msg": "attrs-unsorted-signed-as-written.der"
+  },
+  {
+   "id": "attrs-unsorted-signed-sorted",
+   "what": "signed attributes not in DER order, signature over their DER (sorted) encoding",
+   "lean_expected": false,
+   "msg": "attrs-unsorted-signed-sorted.der"
+  },
+  {
+   "id": "sig-over-a0",
+   "what": "signature over the attributes with the [0] tag 0xA0, not the SET OF tag 0x31",
+   "lean_expected": false,
+   "msg": "sig-over-a0.der"
+  },
+  {
+   "id": "sig-over-content-with-attrs",
+   "what": "signed attributes present, but the signature is over the content",
+   "lean_expected": false,
+   "msg": "sig-over-content-with-attrs.der"
+  },
+  {
+   "id": "md-twice-first-right",
+   "what": "two message-digest attributes, the first one right",
+   "lean_expected": false,
+   "msg": "md-twice-first-right.der"
+  },
+  {
+   "id": "md-twice-second-right",
+   "what": "two message-digest attributes, the second one right",
+   "lean_expected": false,
+   "msg": "md-twice-second-right.der"
+  },
+  {
+   "id": "md-two-values",
+   "what": "one message-digest attribute with two values",
+   "lean_expected": false,
+   "msg": "md-two-values.der"
+  },
+  {
+   "id": "md-missing",
+   "what": "no message-digest attribute",
+   "lean_expected": false,
+   "msg": "md-missing.der"
+  },
+  {
+   "id": "md-wrong",
+   "what": "message-digest of other content",
+   "lean_expected": false,
+   "msg": "md-wrong.der"
+  },
+  {
+   "id": "ct-missing",
+   "what": "no content-type attribute",
+   "lean_expected": false,
+   "msg": "ct-missing.der"
+  },
+  {
+   "id": "ct-twice",
+   "what": "two content-type attributes",
+   "lean_expected": false,
+   "msg": "ct-twice.der"
+  },
+  {
+   "id": "md-two-documents",
+   "what": "detached: message-digests of two different documents, checked against the second",
+   "lean_expected": false,
+   "msg": "md-two-documents.der",
+   "content": "md-two-documents.content"
+  },
+  {
+   "id": "noattrs-not-data",
+   "what": "no signed attributes, and the content type is not id-data",
+   "lean_expected": false,
+   "msg": "noattrs-not-data.der"
+  },
+  {
+   "id": "time-twice",
+   "what": "two signing-time attributes",
+   "lean_expected": false,
+   "msg": "time-twice.der"
+  },
+  {
+   "id": "time-invalid",
+   "what": "signing-time 2026-02-30",
+   "lean_expected": false,
+   "msg": "time-invalid.der"
+  },
+  {
+   "id": "countersig-signed",
+   "what": "a countersignature among the signed attributes",
+   "lean_expected": false,
+   "msg": "countersig-signed.der"
+  },
+  {
+   "id": "si-version-3-issuer",
+   "what": "SignerInfo version 3 with issuerAndSerialNumber (must be 1)",
+   "lean_expected": false,
+   "msg": "si-version-3-issuer.der"
+  },
+  {
+   "id": "sd-version-3",
+   "what": "SignedData version 3 for plain data and v1 signers (must be 1)",
+   "lean_expected": false,
+   "msg": "sd-version-3.der"
+  },
+  {
+   "id": "sig-short",
+   "what": "RSA signature one byte shorter than the modulus (its leading zero dropped)",
+   "lean_expected": false,
+   "msg": "sig-short.der"
+  },
+  {
+   "id": "sig-full-length",
+   "what": "control: the same signature with its leading zero kept",
+   "lean_expected": true,
+   "msg": "sig-full-length.der"
+  },
+  {
+   "id": "trailing-byte",
+   "what": "a zero byte after the message",
+   "lean_expected": false,
+   "msg": "trailing-byte.der"
+  },
+  {
+   "id": "ber-indefinite",
+   "what": "BER indefinite lengths on the outer ContentInfo (legal CMS, not DER)",
+   "lean_expected": false,
+   "msg": "ber-indefinite.der"
+  },
+  {
+   "id": "no-signers",
+   "what": "SignedData with no SignerInfo at all",
+   "lean_expected": false,
+   "msg": "no-signers.der"
+  },
+  {
+   "id": "no-cert",
+   "what": "the signer's certificate is not in the message",
+   "lean_expected": false,
+   "msg": "no-cert.der"
+  }
+ ],
+ "results": {
+  "Lean": {
+   "version": "this project (lean-pkcs7cms)",
+   "verdicts": {
+    "valid-attached": {
+     "ok": true,
+     "err": ""
+    },
+    "valid-detached": {
+     "ok": true,
+     "err": ""
+    },
+    "valid-noattrs": {
+     "ok": true,
+     "err": ""
+    },
+    "valid-ski": {
+     "ok": true,
+     "err": ""
+    },
+    "valid-sha256rsa": {
+     "ok": true,
+     "err": ""
+    },
+    "valid-digest-null": {
+     "ok": true,
+     "err": ""
+    },
+    "attrs-unsorted-signed-as-written": {
+     "ok": false,
+     "err": "signed attributes not in DER order"
+    },
+    "attrs-unsorted-signed-sorted": {
+     "ok": false,
+     "err": "signed attributes not in DER order"
+    },
+    "sig-over-a0": {
+     "ok": false,
+     "err": "signature does not verify"
+    },
+    "sig-over-content-with-attrs": {
+     "ok": false,
+     "err": "signature does not verify"
+    },
+    "md-twice-first-right": {
+     "ok": false,
+     "err": "message-digest attribute"
+    },
+    "md-twice-second-right": {
+     "ok": false,
+     "err": "message-digest attribute"
+    },
+    "md-two-values": {
+     "ok": false,
+     "err": "message-digest attribute"
+    },
+    "md-missing": {
+     "ok": false,
+     "err": "message-digest attribute"
+    },
+    "md-wrong": {
+     "ok": false,
+     "err": "message-digest attribute"
+    },
+    "ct-missing": {
+     "ok": false,
+     "err": "content-type attribute"
+    },
+    "ct-twice": {
+     "ok": false,
+     "err": "content-type attribute"
+    },
+    "md-two-documents": {
+     "ok": false,
+     "err": "message-digest attribute"
+    },
+    "noattrs-not-data": {
+     "ok": false,
+     "err": "no signed attributes, but the content is not id-data"
+    },
+    "time-twice": {
+     "ok": false,
+     "err": "signing-time attribute"
+    },
+    "time-invalid": {
+     "ok": false,
+     "err": "signing-time attribute"
+    },
+    "countersig-signed": {
+     "ok": false,
+     "err": "countersignature among signed attributes"
+    },
+    "si-version-3-issuer": {
+     "ok": false,
+     "err": "signer version"
+    },
+    "sd-version-3": {
+     "ok": false,
+     "err": "SignedData version 3, expected 1"
+    },
+    "sig-short": {
+     "ok": false,
+     "err": "signature length is not the modulus length"
+    },
+    "sig-full-length": {
+     "ok": true,
+     "err": ""
+    },
+    "trailing-byte": {
+     "ok": false,
+     "err": "not a DER SignedData message this reader accepts"
+    },
+    "ber-indefinite": {
+     "ok": false,
+     "err": "not a DER SignedData message this reader accepts"
+    },
+    "no-signers": {
+     "ok": false,
+     "err": "no signers"
+    },
+    "no-cert": {
+     "ok": false,
+     "err": "no certificate matches the signer identifier"
+    }
+   }
+  },
+  "OpenSSL": {
+   "version": "OpenSSL 3.6.4 25 Aug 2026",
+   "verdicts": {
+    "valid-attached": {
+     "ok": true,
+     "err": ""
+    },
+    "valid-detached": {
+     "ok": true,
+     "err": ""
+    },
+    "valid-noattrs": {
+     "ok": true,
+     "err": ""
+    },
+    "valid-ski": {
+     "ok": true,
+     "err": ""
+    },
+    "valid-sha256rsa": {
+     "ok": true,
+     "err": ""
+    },
+    "valid-digest-null": {
+     "ok": true,
+     "err": ""
+    },
+    "attrs-unsorted-signed-as-written": {
+     "ok": true,
+     "err": ""
+    },
+    "attrs-unsorted-signed-sorted": {
+     "ok": false,
+     "err": "803F02ED01000000:error:1700009E:CMS routines:CMS_SignerInfo_verify:verification failure:crypto/cms/cms_sd.c:1004:"
+    },
+    "sig-over-a0": {
+     "ok": false,
+     "err": "803F02ED01000000:error:1700009E:CMS routines:CMS_SignerInfo_verify:verification failure:crypto/cms/cms_sd.c:1004:"
+    },
+    "sig-over-content-with-attrs": {
+     "ok": false,
+     "err": "803F02ED01000000:error:1700009E:CMS routines:CMS_SignerInfo_verify:verification failure:crypto/cms/cms_sd.c:1004:"
+    },
+    "md-twice-first-right": {
+     "ok": false,
+     "err": "803F02ED01000000:error:170000A1:CMS routines:ossl_cms_si_check_attributes:attribute error:crypto/cms/cms_att.c:268:"
+    },
+    "md-twice-second-right": {
+     "ok": false,
+     "err": "803F02ED01000000:error:170000A1:CMS routines:ossl_cms_si_check_attributes:attribute error:crypto/cms/cms_att.c:268:"
+    },
+    "md-two-values": {
+     "ok": false,
+     "err": "803F02ED01000000:error:170000A1:CMS routines:ossl_cms_si_check_attributes:attribute error:crypto/cms/cms_att.c:268:"
+    },
+    "md-missing": {
+     "ok": false,
+     "err": "803F02ED01000000:error:170000A1:CMS routines:ossl_cms_si_check_attributes:attribute error:crypto/cms/cms_att.c:268:"
+    },
+    "md-wrong": {
+     "ok": false,
+     "err": "803F02ED01000000:error:1700006D:CMS routines:CMS_verify:content verify error:crypto/cms/cms_smime.c:501:"
+    },
+    "ct-missing": {
+     "ok": false,
+     "err": "803F02ED01000000:error:170000A1:CMS routines:ossl_cms_si_check_attributes:attribute error:crypto/cms/cms_att.c:268:"
+    },
+    "ct-twice": {
+     "ok": false,
+     "err": "803F02ED01000000:error:170000A1:CMS routines:ossl_cms_si_check_attributes:attribute error:crypto/cms/cms_att.c:268:"
+    },
+    "md-two-documents": {
+     "ok": false,
+     "err": "803F02ED01000000:error:170000A1:CMS routines:ossl_cms_si_check_attributes:attribute error:crypto/cms/cms_att.c:268:"
+    },
+    "noattrs-not-data": {
+     "ok": true,
+     "err": ""
+    },
+    "time-twice": {
+     "ok": false,
+     "err": "803F02ED01000000:error:170000A1:CMS routines:ossl_cms_si_check_attributes:attribute error:crypto/cms/cms_att.c:268:"
+    },
+    "time-invalid": {
+     "ok": true,
+     "err": ""
+    },
+    "countersig-signed": {
+     "ok": false,
+     "err": "803F02ED01000000:error:170000A1:CMS routines:ossl_cms_si_check_attributes:attribute error:crypto/cms/cms_att.c:268:"
+    },
+    "si-version-3-issuer": {
+     "ok": true,
+     "err": ""
+    },
+    "sd-version-3": {
+     "ok": true,
+     "err": ""
+    },
+    "sig-short": {
+     "ok": false,
+     "err": "803F02ED01000000:error:1700009E:CMS routines:CMS_SignerInfo_verify:verification failure:crypto/cms/cms_sd.c:1004:"
+    },
+    "sig-full-length": {
+     "ok": true,
+     "err": ""
+    },
+    "trailing-byte": {
+     "ok": true,
+     "err": ""
+    },
+    "ber-indefinite": {
+     "ok": true,
+     "err": ""
+    },
+    "no-signers": {
+     "ok": false,
+     "err": "803F02ED01000000:error:17000087:CMS routines:CMS_verify:no signers:crypto/cms/cms_smime.c:372:"
+    },
+    "no-cert": {
+     "ok": false,
+     "err": "803F02ED01000000:error:1700008A:CMS routines:CMS_verify:signer certificate not found:crypto/cms/cms_smime.c:387:"
+    }
+   }
+  },
+  "LibreSSL": {
+   "version": "LibreSSL 3.3.6 (macOS)",
+   "verdicts": {
+    "valid-attached": {
+     "ok": true,
+     "err": ""
+    },
+    "valid-detached": {
+     "ok": true,
+     "err": ""
+    },
+    "valid-noattrs": {
+     "ok": true,
+     "err": ""
+    },
+    "valid-ski": {
+     "ok": true,
+     "err": ""
+    },
+    "valid-sha256rsa": {
+     "ok": true,
+     "err": ""
+    },
+    "valid-digest-null": {
+     "ok": true,
+     "err": ""
+    },
+    "attrs-unsorted-signed-as-written": {
+     "ok": true,
+     "err": ""
+    },
+    "attrs-unsorted-signed-sorted": {
+     "ok": false,
+     "err": "8271314816:error:2EFFF09E:CMS routines:CRYPTO_internal:verification failure:/AppleInternal/Library/BuildRoots/4~CV2UugDeYlyMIkNxnlicVCIBNSFk1-DuRW77Gyo/Library/Caches/com.apple.xbs/TemporaryDirectory.G5skni/Sources/libressl/libressl-3.3/crypto/cms/cms_sd.c:818:"
+    },
+    "sig-over-a0": {
+     "ok": false,
+     "err": "8271314816:error:2EFFF09E:CMS routines:CRYPTO_internal:verification failure:/AppleInternal/Library/BuildRoots/4~CV2UugDeYlyMIkNxnlicVCIBNSFk1-DuRW77Gyo/Library/Caches/com.apple.xbs/TemporaryDirectory.G5skni/Sources/libressl/libressl-3.3/crypto/cms/cms_sd.c:818:"
+    },
+    "sig-over-content-with-attrs": {
+     "ok": false,
+     "err": "8271314816:error:2EFFF09E:CMS routines:CRYPTO_internal:verification failure:/AppleInternal/Library/BuildRoots/4~CV2UugDeYlyMIkNxnlicVCIBNSFk1-DuRW77Gyo/Library/Caches/com.apple.xbs/TemporaryDirectory.G5skni/Sources/libressl/libressl-3.3/crypto/cms/cms_sd.c:818:"
+    },
+    "md-twice-first-right": {
+     "ok": false,
+     "err": "8271314816:error:2EFFF06D:CMS routines:CRYPTO_internal:content verify error:/AppleInternal/Library/BuildRoots/4~CV2UugDeYlyMIkNxnlicVCIBNSFk1-DuRW77Gyo/Library/Caches/com.apple.xbs/TemporaryDirectory.G5skni/Sources/libressl/libressl-3.3/crypto/cms/cms_smime.c:459:"
+    },
+    "md-twice-second-right": {
+     "ok": false,
+     "err": "8271314816:error:2EFFF06D:CMS routines:CRYPTO_internal:content verify error:/AppleInternal/Library/BuildRoots/4~CV2UugDeYlyMIkNxnlicVCIBNSFk1-DuRW77Gyo/Library/Caches/com.apple.xbs/TemporaryDirectory.G5skni/Sources/libressl/libressl-3.3/crypto/cms/cms_smime.c:459:"
+    },
+    "md-two-values": {
+     "ok": false,
+     "err": "8271314816:error:2EFFF06D:CMS routines:CRYPTO_internal:content verify error:/AppleInternal/Library/BuildRoots/4~CV2UugDeYlyMIkNxnlicVCIBNSFk1-DuRW77Gyo/Library/Caches/com.apple.xbs/TemporaryDirectory.G5skni/Sources/libressl/libressl-3.3/crypto/cms/cms_smime.c:459:"
+    },
+    "md-missing": {
+     "ok": false,
+     "err": "8271314816:error:2EFFF06D:CMS routines:CRYPTO_internal:content verify error:/AppleInternal/Library/BuildRoots/4~CV2UugDeYlyMIkNxnlicVCIBNSFk1-DuRW77Gyo/Library/Caches/com.apple.xbs/TemporaryDirectory.G5skni/Sources/libressl/libressl-3.3/crypto/cms/cms_smime.c:459:"
+    },
+    "md-wrong": {
+     "ok": false,
+     "err": "8271314816:error:2EFFF06D:CMS routines:CRYPTO_internal:content verify error:/AppleInternal/Library/BuildRoots/4~CV2UugDeYlyMIkNxnlicVCIBNSFk1-DuRW77Gyo/Library/Caches/com.apple.xbs/TemporaryDirectory.G5skni/Sources/libressl/libressl-3.3/crypto/cms/cms_smime.c:459:"
+    },
+    "ct-missing": {
+     "ok": true,
+     "err": ""
+    },
+    "ct-twice": {
+     "ok": true,
+     "err": ""
+    },
+    "md-two-documents": {
+     "ok": false,
+     "err": "8271314816:error:2EFFF06D:CMS routines:CRYPTO_internal:content verify error:/AppleInternal/Library/BuildRoots/4~CV2UugDeYlyMIkNxnlicVCIBNSFk1-DuRW77Gyo/Library/Caches/com.apple.xbs/TemporaryDirectory.G5skni/Sources/libressl/libressl-3.3/crypto/cms/cms_smime.c:459:"
+    },
+    "noattrs-not-data": {
+     "ok": true,
+     "err": ""
+    },
+    "time-twice": {
+     "ok": true,
+     "err": ""
+    },
+    "time-invalid": {
+     "ok": true,
+     "err": ""
+    },
+    "countersig-signed": {
+     "ok": true,
+     "err": ""
+    },
+    "si-version-3-issuer": {
+     "ok": true,
+     "err": ""
+    },
+    "sd-version-3": {
+     "ok": true,
+     "err": ""
+    },
+    "sig-short": {
+     "ok": false,
+     "err": "8271314816:error:2EFFF09E:CMS routines:CRYPTO_internal:verification failure:/AppleInternal/Library/BuildRoots/4~CV2UugDeYlyMIkNxnlicVCIBNSFk1-DuRW77Gyo/Library/Caches/com.apple.xbs/TemporaryDirectory.G5skni/Sources/libressl/libressl-3.3/crypto/cms/cms_sd.c:818:"
+    },
+    "sig-full-length": {
+     "ok": true,
+     "err": ""
+    },
+    "trailing-byte": {
+     "ok": true,
+     "err": ""
+    },
+    "ber-indefinite": {
+     "ok": true,
+     "err": ""
+    },
+    "no-signers": {
+     "ok": false,
+     "err": "8271314816:error:2EFFF087:CMS routines:CRYPTO_internal:no signers:/AppleInternal/Library/BuildRoots/4~CV2UugDeYlyMIkNxnlicVCIBNSFk1-DuRW77Gyo/Library/Caches/com.apple.xbs/TemporaryDirectory.G5skni/Sources/libressl/libressl-3.3/crypto/cms/cms_smime.c:353:"
+    },
+    "no-cert": {
+     "ok": false,
+     "err": "8271314816:error:2EFFF08A:CMS routines:CRYPTO_internal:signer certificate not found:/AppleInternal/Library/BuildRoots/4~CV2UugDeYlyMIkNxnlicVCIBNSFk1-DuRW77Gyo/Library/Caches/com.apple.xbs/TemporaryDirectory.G5skni/Sources/libressl/libressl-3.3/crypto/cms/cms_smime.c:368:"
+    }
+   }
+  },
+  "GnuTLS": {
+   "version": "GnuTLS 3.8.13 (certtool --p7-verify)",
+   "verdicts": {
+    "valid-attached": {
+     "ok": true,
+     "err": ""
+    },
+    "valid-detached": {
+     "ok": true,
+     "err": ""
+    },
+    "valid-noattrs": {
+     "ok": true,
+     "err": ""
+    },
+    "valid-ski": {
+     "ok": true,
+     "err": ""
+    },
+    "valid-sha256rsa": {
+     "ok": true,
+     "err": ""
+    },
+    "valid-digest-null": {
+     "ok": true,
+     "err": ""
+    },
+    "attrs-unsorted-signed-as-written": {
+     "ok": false,
+     "err": "Signature status: verification failed: Public key signature verification has failed."
+    },
+    "attrs-unsorted-signed-sorted": {
+     "ok": true,
+     "err": ""
+    },
+    "sig-over-a0": {
+     "ok": false,
+     "err": "Signature status: verification failed: Public key signature verification has failed."
+    },
+    "sig-over-content-with-attrs": {
+     "ok": false,
+     "err": "Signature status: verification failed: Public key signature verification has failed."
+    },
+    "md-twice-first-right": {
+     "ok": true,
+     "err": ""
+    },
+    "md-twice-second-right": {
+     "ok": true,
+     "err": ""
+    },
+    "md-two-values": {
+     "ok": false,
+     "err": "Signature status: verification failed: Public key signature verification has failed."
+    },
+    "md-missing": {
+     "ok": false,
+     "err": "Signature status: verification failed: Public key signature verification has failed."
+    },
+    "md-wrong": {
+     "ok": false,
+     "err": "Signature status: verification failed: Public key signature verification has failed."
+    },
+    "ct-missing": {
+     "ok": true,
+     "err": ""
+    },
+    "ct-twice": {
+     "ok": false,
+     "err": "Signature status: verification failed: Error in parsing."
+    },
+    "md-two-documents": {
+     "ok": true,
+     "err": ""
+    },
+    "noattrs-not-data": {
+     "ok": true,
+     "err": ""
+    },
+    "time-twice": {
+     "ok": true,
+     "err": ""
+    },
+    "time-invalid": {
+     "ok": true,
+     "err": ""
+    },
+    "countersig-signed": {
+     "ok": true,
+     "err": ""
+    },
+    "si-version-3-issuer": {
+     "ok": true,
+     "err": ""
+    },
+    "sd-version-3": {
+     "ok": true,
+     "err": ""
+    },
+    "sig-short": {
+     "ok": false,
+     "err": "Signature status: verification failed: Public key signature verification has failed."
+    },
+    "sig-full-length": {
+     "ok": true,
+     "err": ""
+    },
+    "trailing-byte": {
+     "ok": false,
+     "err": "import error: ASN1 parser: Error in DER parsing."
+    },
+    "ber-indefinite": {
+     "ok": true,
+     "err": ""
+    },
+    "no-signers": {
+     "ok": false,
+     "err": ""
+    },
+    "no-cert": {
+     "ok": false,
+     "err": "Signature status: verification failed: Public key signature verification has failed."
+    }
+   }
+  },
+  "Java": {
+   "version": "OpenJDK 26.0.2.1 (sun.security.pkcs.PKCS7, as jarsigner)",
+   "verdicts": {
+    "valid-attached": {
+     "ok": true,
+     "err": ""
+    },
+    "valid-detached": {
+     "ok": true,
+     "err": ""
+    },
+    "valid-noattrs": {
+     "ok": true,
+     "err": ""
+    },
+    "valid-ski": {
+     "ok": false,
+     "err": "ParsingException: Unable to parse the encoded bytes"
+    },
+    "valid-sha256rsa": {
+     "ok": true,
+     "err": ""
+    },
+    "valid-digest-null": {
+     "ok": true,
+     "err": ""
+    },
+    "attrs-unsorted-signed-as-written": {
+     "ok": true,
+     "err": ""
+    },
+    "attrs-unsorted-signed-sorted": {
+     "ok": false,
+     "err": "Exception: verify returned null"
+    },
+    "sig-over-a0": {
+     "ok": false,
+     "err": "Exception: verify returned null"
+    },
+    "sig-over-content-with-attrs": {
+     "ok": false,
+     "err": "Exception: verify returned null"
+    },
+    "md-twice-first-right": {
+     "ok": false,
+     "err": "ParsingException: Unable to parse the encoded bytes"
+    },
+    "md-twice-second-right": {
+     "ok": false,
+     "err": "ParsingException: Unable to parse the encoded bytes"
+    },
+    "md-two-values": {
+     "ok": false,
+     "err": "ParsingException: Unable to parse the encoded bytes"
+    },
+    "md-missing": {
+     "ok": false,
+     "err": "SignatureException: Error verifying signature"
+    },
+    "md-wrong": {
+     "ok": false,
+     "err": "Exception: verify returned null"
+    },
+    "ct-missing": {
+     "ok": false,
+     "err": "SignatureException: Error verifying signature"
+    },
+    "ct-twice": {
+     "ok": false,
+     "err": "ParsingException: Unable to parse the encoded bytes"
+    },
+    "md-two-documents": {
+     "ok": false,
+     "err": "ParsingException: Unable to parse the encoded bytes"
+    },
+    "noattrs-not-data": {
+     "ok": false,
+     "err": "SignatureException: Missing authenticatedAttributes"
+    },
+    "time-twice": {
+     "ok": false,
+     "err": "ParsingException: Unable to parse the encoded bytes"
+    },
+    "time-invalid": {
+     "ok": true,
+     "err": ""
+    },
+    "countersig-signed": {
+     "ok": false,
+     "err": "ParsingException: Unable to parse the encoded bytes"
+    },
+    "si-version-3-issuer": {
+     "ok": true,
+     "err": ""
+    },
+    "sd-version-3": {
+     "ok": true,
+     "err": ""
+    },
+    "sig-short": {
+     "ok": false,
+     "err": "SignatureException: Bad signature length: got 255 but was expecting 256"
+    },
+    "sig-full-length": {
+     "ok": true,
+     "err": ""
+    },
+    "trailing-byte": {
+     "ok": true,
+     "err": ""
+    },
+    "ber-indefinite": {
+     "ok": true,
+     "err": ""
+    },
+    "no-signers": {
+     "ok": false,
+     "err": "Exception: verify returned null"
+    },
+    "no-cert": {
+     "ok": false,
+     "err": "Exception: verify returned null"
+    }
+   }
+  },
+  ".NET": {
+   "version": ".NET 10, System.Security.Cryptography.Pkcs 10.0.0 (SignedCms.CheckSignature)",
+   "verdicts": {
+    "valid-attached": {
+     "ok": true,
+     "err": ""
+    },
+    "valid-detached": {
+     "ok": true,
+     "err": ""
+    },
+    "valid-noattrs": {
+     "ok": true,
+     "err": ""
+    },
+    "valid-ski": {
+     "ok": true,
+     "err": ""
+    },
+    "valid-sha256rsa": {
+     "ok": true,
+     "err": ""
+    },
+    "valid-digest-null": {
+     "ok": true,
+     "err": ""
+    },
+    "attrs-unsorted-signed-as-written": {
+     "ok": true,
+     "err": ""
+    },
+    "attrs-unsorted-signed-sorted": {
+     "ok": true,
+     "err": ""
+    },
+    "sig-over-a0": {
+     "ok": false,
+     "err": "CryptographicException: Invalid signature."
+    },
+    "sig-over-content-with-attrs": {
+     "ok": false,
+     "err": "CryptographicException: Invalid signature."
+    },
+    "md-twice-first-right": {
+     "ok": false,
+     "err": "CryptographicException: The hash value is not correct."
+    },
+    "md-twice-second-right": {
+     "ok": false,
+     "err": "CryptographicException: The hash value is not correct."
+    },
+    "md-two-values": {
+     "ok": false,
+     "err": "CryptographicException: The hash value is not correct."
+    },
+    "md-missing": {
+     "ok": false,
+     "err": "CryptographicException: The cryptographic message does not contain an expected authenticated attribute."
+    },
+    "md-wrong": {
+     "ok": false,
+     "err": "CryptographicException: The hash value is not correct."
+    },
+    "ct-missing": {
+     "ok": true,
+     "err": ""
+    },
+    "ct-twice": {
+     "ok": true,
+     "err": ""
+    },
+    "md-two-documents": {
+     "ok": false,
+     "err": "CryptographicException: The hash value is not correct."
+    },
+    "noattrs-not-data": {
+     "ok": true,
+     "err": ""
+    },
+    "time-twice": {
+     "ok": true,
+     "err": ""
+    },
+    "time-invalid": {
+     "ok": true,
+     "err": ""
+    },
+    "countersig-signed": {
+     "ok": true,
+     "err": ""
+    },
+    "si-version-3-issuer": {
+     "ok": true,
+     "err": ""
+    },
+    "sd-version-3": {
+     "ok": true,
+     "err": ""
+    },
+    "sig-short": {
+     "ok": true,
+     "err": ""
+    },
+    "sig-full-length": {
+     "ok": true,
+     "err": ""
+    },
+    "trailing-byte": {
+     "ok": true,
+     "err": ""
+    },
+    "ber-indefinite": {
+     "ok": true,
+     "err": ""
+    },
+    "no-signers": {
+     "ok": false,
+     "err": "Exception: no signers"
+    },
+    "no-cert": {
+     "ok": false,
+     "err": "CryptographicException: Cannot find the original signer."
+    }
+   }
+  },
+  "Apple": {
+   "version": "macOS Security framework (CMSDecoder)",
+   "verdicts": {
+    "valid-attached": {
+     "ok": true,
+     "err": ""
+    },
+    "valid-detached": {
+     "ok": true,
+     "err": ""
+    },
+    "valid-noattrs": {
+     "ok": true,
+     "err": ""
+    },
+    "valid-ski": {
+     "ok": true,
+     "err": ""
+    },
+    "valid-sha256rsa": {
+     "ok": true,
+     "err": ""
+    },
+    "valid-digest-null": {
+     "ok": true,
+     "err": ""
+    },
+    "attrs-unsorted-signed-as-written": {
+     "ok": true,
+     "err": ""
+    },
+    "attrs-unsorted-signed-sorted": {
+     "ok": false,
+     "err": "signer 0: status 3, result 0"
+    },
+    "sig-over-a0": {
+     "ok": false,
+     "err": "signer 0: status 3, result 0"
+    },
+    "sig-over-content-with-attrs": {
+     "ok": false,
+     "err": "signer 0: status 3, result 0"
+    },
+    "md-twice-first-right": {
+     "ok": false,
+     "err": "signer 0: status 3, result 0"
+    },
+    "md-twice-second-right": {
+     "ok": false,
+     "err": "signer 0: status 3, result 0"
+    },
+    "md-two-values": {
+     "ok": false,
+     "err": "signer 0: status 3, result 0"
+    },
+    "md-missing": {
+     "ok": false,
+     "err": "signer 0: status 3, result 0"
+    },
+    "md-wrong": {
+     "ok": false,
+     "err": "signer 0: status 3, result 0"
+    },
+    "ct-missing": {
+     "ok": false,
+     "err": "signer 0: status 3, result 0"
+    },
+    "ct-twice": {
+     "ok": false,
+     "err": "signer 0: status 3, result 0"
+    },
+    "md-two-documents": {
+     "ok": false,
+     "err": "signer 0: status 3, result 0"
+    },
+    "noattrs-not-data": {
+     "ok": false,
+     "err": "signer 0: status 2, result 0"
+    },
+    "time-twice": {
+     "ok": true,
+     "err": ""
+    },
+    "time-invalid": {
+     "ok": true,
+     "err": ""
+    },
+    "countersig-signed": {
+     "ok": true,
+     "err": ""
+    },
+    "si-version-3-issuer": {
+     "ok": true,
+     "err": ""
+    },
+    "sd-version-3": {
+     "ok": true,
+     "err": ""
+    },
+    "sig-short": {
+     "ok": true,
+     "err": ""
+    },
+    "sig-full-length": {
+     "ok": true,
+     "err": ""
+    },
+    "trailing-byte": {
+     "ok": true,
+     "err": ""
+    },
+    "ber-indefinite": {
+     "ok": true,
+     "err": ""
+    },
+    "no-signers": {
+     "ok": false,
+     "err": "no signers"
+    },
+    "no-cert": {
+     "ok": false,
+     "err": "signer 0: status 3, result 0"
+    }
+   }
+  }
+ }
+}

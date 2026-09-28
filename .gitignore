@@ -1,0 +1,9 @@
+.lake/
+test/pki/*.key
+test/pki/*.csr
+test/pki/*.srl
+__pycache__/
+out/
+test/crosscheck/dotnet/obj/
+test/crosscheck/dotnet/bin/
+test/crosscheck/swift/crosscheck-apple

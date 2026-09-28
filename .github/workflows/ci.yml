@@ -1,0 +1,26 @@
+name: CI
+on:
+  push:
+  pull_request:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build (Lean's kernel checks every proof, the real signatures included)
+        uses: leanprover/lean-action@v1
+        with:
+          build: true
+          test: false
+          lint: false
+      - name: Axioms (only Lean's three standard axioms)
+        run: |
+          lake env lean test/Axioms.lean | tee axioms.txt
+          ! grep -E "sorryAx|native|ofReduceBool" axioms.txt
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: The one-flaw corpus, through Lean and OpenSSL
+        run: |
+          pip install cryptography
+          python test/crosscheck/run.py --only Lean,OpenSSL --out out/crosscheck

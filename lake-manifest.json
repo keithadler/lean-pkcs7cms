@@ -1,0 +1,16 @@
+{"version": "1.2.0",
+ "packagesDir": ".lake/packages",
+ "packages":
+ [{"url": "https://github.com/keithadler/lean-x509",
+   "type": "git",
+   "subDir": null,
+   "scope": "",
+   "rev": "60b096a407130f743df9714aa5ed0903bc6f5ec2",
+   "name": "X509",
+   "manifestFile": "lake-manifest.json",
+   "inputRev": "60b096a407130f743df9714aa5ed0903bc6f5ec2",
+   "inherited": false,
+   "configFile": "lakefile.toml"}],
+ "name": "CMS",
+ "lakeDir": ".lake",
+ "fixedToolchain": false}

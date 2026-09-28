@@ -1,0 +1,14 @@
+name = "CMS"
+defaultTargets = ["CMS", "cms"]
+
+[[require]]
+name = "X509"
+git = "https://github.com/keithadler/lean-x509"
+rev = "60b096a407130f743df9714aa5ed0903bc6f5ec2"
+
+[[lean_lib]]
+name = "CMS"
+
+[[lean_exe]]
+name = "cms"
+root = "Main"
