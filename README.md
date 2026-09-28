@@ -40,6 +40,12 @@ accepted that flaw. The full table is in [test/crosscheck/RESULTS.md](test/cross
 | A byte after the end of the message | OpenSSL, LibreSSL, Java, .NET and Apple accept. |
 | A signer named by subject key identifier, a control that every verifier should accept | Java's `sun.security.pkcs.PKCS7`, which verifies signed JARs, cannot parse it, although RFC 5652 §5.3 requires verifiers to support it. |
 
+Reported: the content-type check to [OpenSSL](https://github.com/openssl/openssl/issues/33022),
+[LibreSSL](https://github.com/libressl/portable/issues/1412) and [.NET](https://github.com/dotnet/runtime/issues/134822).
+We judged it low severity, since it needs an application that acts on the content type after verifying, so
+it was reported in public. The findings were sealed and timestamped before that; see
+[lean-pkcs7cms-disclosure](https://github.com/keithadler/lean-pkcs7cms-disclosure).
+
 Every one of these is refused by this project, and the reason is a theorem, not a test: the rules are the
 specification `SignerValid`, and `signerOk_iff` proves the checker is exactly that specification.
 
@@ -57,6 +63,7 @@ specification `SignerValid`, and `signerOk_iff` proves the checker is exactly th
 | `verifyStamp_sound` | A timestamp token `verifyStamp` accepts is a valid CMS message, and what it reports is the `TSTInfo` that was signed. |
 | `attached_valid`, `detached_valid`, `noattr_valid` | Real messages from OpenSSL verify, checked by the kernel. |
 | `detached_tampered`, `detached_needs_content` | Change one byte of the content and the signature fails; a detached signature with no content is not valid. |
+| `findings_stamped` | DigiCert's timestamp token for the SHA-256 of the sealed findings file (in [lean-pkcs7cms-disclosure](https://github.com/keithadler/lean-pkcs7cms-disclosure)) verifies and dates it 2026-09-28 22:03:34 UTC. |
 | `digicert_stamps_msg` | DigiCert's real timestamp token verifies and stamps the SHA-256 of the test message at 2026-09-28 21:43:25 UTC. |
 
 `test/Axioms.lean` prints the axioms of each: Lean's three standard axioms at most, no `sorry`, no

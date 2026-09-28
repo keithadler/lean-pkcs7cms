@@ -10,6 +10,7 @@ FILES = [
     ("detached", "test/pki/detached.der", "The same message, signed detached: the content is not in it"),
     ("noattr", "test/pki/noattr.der", "Signed with no signed attributes: the signature is over the content itself"),
     ("msg", "test/pki/msg.txt", "The content the three messages sign"),
+    ("findings", "test/real/findings-token.der", "DigiCert's timestamp token for the SHA-256 of the sealed findings file in keithadler/lean-pkcs7cms-disclosure"),
     ("digicert", "test/real/digicert-token.der", "An RFC 3161 timestamp token from DigiCert's public timestamp server for the SHA-256 of `msg`"),
 ]
 

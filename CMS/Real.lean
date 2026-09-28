@@ -38,4 +38,12 @@ theorem digicert_stamps_msg :
       some (Sha256.hash Data.msg, 20260928214325,
         [some (Sha256.ascii "DigiCert SHA256 RSA4096 Timestamp Responder 2026 1")]) := by decide +kernel
 
+/-- DigiCert's timestamp token for the sealed findings file of 2026-09-28
+(keithadler/lean-pkcs7cms-disclosure, `commitment/findings-2026-09-28.txt`) verifies, and says its SHA-256 existed
+at 2026-09-28 22:03:34 UTC. -/
+theorem findings_stamped :
+    (verifyStamp Data.findings []).map (fun (s, cs) => (s.hashed, s.time, cs.map fun (c : Cert) => commonName c.subject)) =
+      some (X509.Data.bytesOf 0x06cce00a1e2d4c2b8cc88708c038ccf5502ec230f49171b6878e0711ae35916f 32 [], 20260928220334,
+        [some (Sha256.ascii "DigiCert SHA256 RSA4096 Timestamp Responder 2026 1")]) := by decide +kernel
+
 end CMS.Real

@@ -16,3 +16,4 @@ open CMS
 #print axioms CMS.Real.detached_tampered
 #print axioms CMS.Real.detached_needs_content
 #print axioms CMS.Real.digicert_stamps_msg
+#print axioms CMS.Real.findings_stamped
