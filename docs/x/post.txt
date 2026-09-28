@@ -1,4 +1,4 @@
-Most signed files you trust use one format: CMS, the signature inside PKCS #7, S/MIME email, Windows Authenticode, PDF signatures, signed Linux kernel modules and trusted timestamps.
+A lot of what your computer trusts is signed in one format: CMS, the signature inside PKCS #7, S/MIME email, Windows Authenticode, PDF signatures, signed Linux kernel modules and trusted timestamps.
 
 I wrote down RFC 5652's signing rules in Lean, proved a verifier equal to them, and had Lean's kernel check real signatures, including a 4096-bit RSA timestamp from DigiCert. As far as I can find, nobody has formalized CMS before.
 
