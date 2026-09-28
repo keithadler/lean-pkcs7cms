@@ -22,6 +22,13 @@ underneath: [ASN1*](https://www.microsoft.com/en-us/research/publication/asn1-pr
 [lean-x509](https://github.com/keithadler/lean-x509) verify X.509 certificates. This project is built on
 lean-x509: its DER parser, SHA-256, RSA and certificate reader.
 
+![The widget in Lean Studio's Infoview style: the message's bytes, the signed-attribute tag swap, the RSA block sᵉ mod n, and each rule of SignerValid with its theorem](docs/x/x-card-0-lean-proof.png)
+
+`CMS/Widget.lean` draws one verification, the timestamp on the sealed findings, from data Lean computes:
+the DER layout, the signed-attribute tag swap, the 512-byte block RSA reveals, and each rule of `SignerValid`
+with the theorem behind it. Put the cursor on its `#widget` line in Lean Studio, or open `docs/index.html`
+(serve `docs/` over HTTP; `scripts/Props.lean` writes the data).
+
 ## Seven verifiers, one message each flaw
 
 `test/crosscheck` builds CMS messages byte by byte, each with exactly one thing wrong and a correct RSA
