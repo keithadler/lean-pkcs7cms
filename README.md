@@ -110,6 +110,13 @@ Run the cross-library table (needs `cryptography`; uses whichever of OpenSSL, Li
 python3 test/crosscheck/run.py
 ```
 
+## Images
+
+Cards for posts, with the post text, are in [docs/x](docs/x): the verification above
+([x-card-0-lean-proof.png](docs/x/x-card-0-lean-proof.png)), the seven-verifier table
+([x-card-1.png](docs/x/x-card-1.png)), and the sealed findings with DigiCert's timestamp
+([x-card-2.png](docs/x/x-card-2.png)). Their sources are `docs/x.html` and `docs/x/src/`.
+
 ## Layout
 
 | Path | What it is |
@@ -118,6 +125,8 @@ python3 test/crosscheck/run.py
 | `CMS/Slice.lean` | `signed_attrs_slice`: the signed bytes are in the message |
 | `CMS/Timestamp.lean` | RFC 3161 timestamp tokens |
 | `CMS/Real.lean`, `CMS/Data.lean` | Real messages, checked by the kernel (`scripts/embed.py` writes `Data.lean`) |
+| `CMS/Widget.lean`, `widget/CMS.js` | The widget: one verification, drawn from data Lean computes |
+| `docs/` | The widget as a standalone page (`index.html`, data from `scripts/Props.lean`) and the cards for posts |
 | `test/crosscheck/` | The one-flaw corpus and the drivers for the other verifiers |
 | `test/pki`, `test/real` | The test messages, and DigiCert's token |
 
