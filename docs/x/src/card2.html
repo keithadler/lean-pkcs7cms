@@ -1,0 +1,25 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css"><style>
+.hash { font: 700 46px/1.35 'JetBrains Mono', monospace; color: #fff; letter-spacing: .02em; margin-top: 40px;
+  background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.1); border-radius: 16px; padding: 26px 32px; }
+.hash .l { font: 600 16px Inter; color: #8c94a8; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 10px; }
+.facts { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 26px; }
+.f { background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.09); border-radius: 14px; padding: 22px 26px; }
+.f .t { font: 600 15px 'JetBrains Mono', monospace; color: #8c94a8; }
+.f .h { font-size: 25px; font-weight: 700; margin-top: 8px; line-height: 1.3; }
+.f .s { font-size: 18px; color: #9aa3b8; margin-top: 8px; line-height: 1.4; }
+.f code { font-family: 'JetBrains Mono', monospace; color: #6ee7a8; font-size: 17px; }
+</style></head><body>
+<div class="card" style="flex-direction: column; gap: 0">
+  <div class="kicker">Sealed before reporting</div>
+  <h1 style="font-size: 54px">The findings, sealed and <em>timestamped</em>.</h1>
+  <div class="hash"><div class="l">SHA-256 of the sealed findings</div>06cce00a1e2d4c2b8cc88708c038ccf5<br>502ec230f49171b6878e0711ae35916f</div>
+  <div class="facts">
+    <div class="f"><div class="t">RFC 3161 timestamp</div><div class="h">DigiCert, 2026-09-28 22:03:34 UTC</div>
+      <div class="s">DigiCert SHA256 RSA4096 Timestamp Responder 2026 1</div></div>
+    <div class="f"><div class="t">Checked by Lean's kernel</div><div class="h">The token verifies, RSA-4096 included</div>
+      <div class="s"><code>findings_stamped</code>, by <code>decide +kernel</code></div></div>
+  </div>
+  <div class="f" style="margin-top: 20px"><div class="t">Reported in public, low severity</div>
+    <div class="h" style="font: 600 22px 'JetBrains Mono', monospace; color: #c9d1e4">openssl/openssl#33022 · libressl/portable#1412 · dotnet/runtime#134822</div></div>
+  <div class="foot"><span><b>github.com/keithadler/lean-pkcs7cms-disclosure</b></span><span>shasum -a 256 commitment/findings-2026-09-28.txt</span></div>
+</div></body></html>

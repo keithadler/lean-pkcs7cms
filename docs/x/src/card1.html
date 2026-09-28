@@ -1,0 +1,16 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css"><style>
+table { border-collapse: separate; border-spacing: 7px 10px; margin-top: 34px; width: 100%; }
+th { text-align: left; font-weight: 500; font-size: 24px; color: #c9d1e4; padding-right: 10px; white-space: nowrap; }
+th b { color: #ff8f8f; }
+td { text-align: center; font: 600 18px 'JetBrains Mono', monospace; border-radius: 9px; padding: 15px 6px; }
+td.h { font: 700 19px Inter; color: #8c94a8; padding: 0 6px 2px; }
+td.h.lean { color: #6ee7a8; }
+td.acc { background: rgba(255,120,120,.16); color: #ff9a9a; }
+td.ref { background: rgba(110,231,168,.10); color: #6ee7a8; }
+</style></head><body>
+<div class="card" style="flex-direction: column; gap: 0">
+  <div class="kicker">CMS / PKCS #7 · RFC 5652 · Lean 4</div>
+  <h1 style="font-size: 56px">Seven signature verifiers. One proved in Lean.</h1>
+  <table><tr><td></td><td class='h'>OpenSSL</td><td class='h'>LibreSSL</td><td class='h'>GnuTLS</td><td class='h'>Java</td><td class='h'>.NET</td><td class='h'>Apple</td><td class='h lean'>Lean</td></tr><tr><th>Content type changed after signing, <b>no key</b></th><td class="acc">accepts</td><td class="acc">accepts</td><td class="ref">refuses</td><td class="ref">refuses</td><td class="acc">accepts</td><td class="ref">refuses</td><td class="ref">refuses</td></tr><tr><th>One signature, two different documents</th><td class="ref">refuses</td><td class="ref">refuses</td><td class="acc">accepts</td><td class="ref">refuses</td><td class="ref">refuses</td><td class="ref">refuses</td><td class="ref">refuses</td></tr><tr><th>Attributes out of order, signed as written</th><td class="acc">accepts</td><td class="acc">accepts</td><td class="ref">refuses</td><td class="acc">accepts</td><td class="acc">accepts</td><td class="acc">accepts</td><td class="ref">refuses</td></tr><tr><th>Attributes out of order, signed sorted</th><td class="ref">refuses</td><td class="ref">refuses</td><td class="acc">accepts</td><td class="ref">refuses</td><td class="acc">accepts</td><td class="ref">refuses</td><td class="ref">refuses</td></tr><tr><th>No content-type attribute</th><td class="ref">refuses</td><td class="acc">accepts</td><td class="acc">accepts</td><td class="ref">refuses</td><td class="acc">accepts</td><td class="ref">refuses</td><td class="ref">refuses</td></tr><tr><th>Countersignature among signed attributes</th><td class="ref">refuses</td><td class="acc">accepts</td><td class="acc">accepts</td><td class="ref">refuses</td><td class="acc">accepts</td><td class="acc">accepts</td><td class="ref">refuses</td></tr><tr><th>RSA signature one byte short</th><td class="ref">refuses</td><td class="ref">refuses</td><td class="ref">refuses</td><td class="ref">refuses</td><td class="acc">accepts</td><td class="acc">accepts</td><td class="ref">refuses</td></tr><tr><th>A byte after the message</th><td class="acc">accepts</td><td class="acc">accepts</td><td class="ref">refuses</td><td class="acc">accepts</td><td class="acc">accepts</td><td class="acc">accepts</td><td class="ref">refuses</td></tr></table>
+  <div class="foot"><span><b>github.com/keithadler/lean-pkcs7cms</b> · MIT</span><span>Each message has exactly one flaw and a valid RSA signature</span></div>
+</div></body></html>

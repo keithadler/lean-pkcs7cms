@@ -1,0 +1,21 @@
+Most signed files you trust use one format: CMS, the signature inside PKCS #7, S/MIME email, Windows Authenticode, PDF signatures, signed Linux kernel modules and trusted timestamps.
+
+I wrote down RFC 5652's signing rules in Lean, proved a verifier equal to them, and had Lean's kernel check real signatures, including a 4096-bit RSA timestamp from DigiCert. As far as I can find, nobody has formalized CMS before.
+
+Then I tested six widely used verifiers against it: OpenSSL, LibreSSL, GnuTLS, Java, .NET and Apple. Each test message had exactly one flaw and a valid signature.
+
+What I found:
+
+- OpenSSL, LibreSSL and .NET let anyone change what kind of content a signed message says it holds, with no key, and still call the signature valid
+- GnuTLS accepts one signature as valid for two different documents
+- given the same file, OpenSSL and GnuTLS can reach opposite verdicts on whether it is validly signed
+- .NET and Apple accept an RSA signature one byte too short
+- Java's signed-JAR verifier cannot read a signer named by key ID, which the standard requires
+
+None of these lets an outsider forge a signature, and I judged them low severity, so they are reported in public to OpenSSL, LibreSSL and .NET.
+
+Before reporting, I sealed the findings in one file and had DigiCert timestamp its SHA-256:
+06cce00a1e2d4c2b8cc88708c038ccf5502ec230f49171b6878e0711ae35916f
+Lean's kernel verifies that timestamp too.
+
+MIT: github.com/keithadler/lean-pkcs7cms
