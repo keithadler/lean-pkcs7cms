@@ -138,7 +138,7 @@ def main():
          "OpenJDK " + (sh([java, "-version"]).stderr.split('"') + ["?", "?"])[1] + " (sun.security.pkcs.PKCS7, as jarsigner)"),
         (".NET", json_driver([os.path.expanduser("~/.dotnet/dotnet"), os.path.join(d, "dotnet-bin", "crosscheck.dll")],
                              env=dotnet_env),
-         ".NET 10, System.Security.Cryptography.Pkcs 10.0.0 (SignedCms.CheckSignature)"),
+         ".NET 10, System.Security.Cryptography.Pkcs 10.0.12 (SignedCms.CheckSignature)"),
         ("Apple", json_driver([apple]), "macOS Security framework (CMSDecoder)"),
     ]
     if only:

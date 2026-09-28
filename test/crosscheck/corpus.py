@@ -189,6 +189,13 @@ def build(pki, content=CONTENT, *, attrs="default", order="der", sign_over="as_w
     return msg + trailing
 
 
+def relabel(msg):
+    """Changes eContentType after signing, which needs no key: it is outside the signed bytes."""
+    data = oid(DATA)
+    i = msg.find(data)
+    return msg[:i + len(data) - 1] + b"\x05" + msg[i + len(data):]
+
+
 def sign_until_leading_zero(pki):
     """A message whose RSA signature starts with a zero byte, found by varying the signing time."""
     for i in range(20000):
@@ -239,6 +246,12 @@ def cases(pki):
         ("ct-missing", "no content-type attribute", False, build(pki, attrs=lambda _: [st, md]), None),
         ("ct-twice", "two content-type attributes", False,
          build(pki, attrs=lambda _: [ct, ct, st, md]), None),
+        ("ct-mismatch", "content-type attribute says TSTInfo, the content is id-data", False,
+         build(pki, attrs=lambda _: [attr(CONTENT_TYPE, oid(TST_INFO)), st, md]), None),
+        ("relabeled-after-signing", "signed normally, then eContentType changed from id-data to 1.2.840.113549.1.7.5, with no key", False,
+         relabel(build(pki)), None),
+        ("ct-mismatch-tst", "content-type attribute says id-data, the content is TSTInfo", False,
+         build(pki, e_content_type=TST_INFO, attrs=lambda _: [ct, st, md]), None),
         ("md-two-documents", "detached: message-digests of two different documents, checked against the second", False,
          build(pki, detached=True, attrs=lambda _: [ct, st, attr(MESSAGE_DIGEST, octets(hashlib.sha256(OTHER).digest())), md]),
          CONTENT),

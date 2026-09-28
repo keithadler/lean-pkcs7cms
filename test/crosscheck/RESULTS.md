@@ -21,6 +21,9 @@ Each message has exactly one flaw and a correct RSA signature over what it signs
 | message-digest of other content | refuses | refuses | refuses | refuses | refuses | refuses | refuses | refuses |
 | no content-type attribute | refuses | refuses | refuses | **accepts** | **accepts** | refuses | **accepts** | refuses |
 | two content-type attributes | refuses | refuses | refuses | **accepts** | refuses | refuses | **accepts** | refuses |
+| content-type attribute says TSTInfo, the content is id-data | refuses | refuses | **accepts** | **accepts** | refuses | refuses | **accepts** | refuses |
+| signed normally, then eContentType changed from id-data to 1.2.840.113549.1.7.5, with no key | refuses | refuses | **accepts** | **accepts** | refuses | refuses | **accepts** | refuses |
+| content-type attribute says id-data, the content is TSTInfo | refuses | refuses | **accepts** | **accepts** | refuses | refuses | **accepts** | refuses |
 | detached: message-digests of two different documents, checked against the second | refuses | refuses | refuses | refuses | **accepts** | refuses | refuses | refuses |
 | no signed attributes, and the content type is not id-data | refuses | refuses | **accepts** | **accepts** | **accepts** | refuses | **accepts** | refuses |
 | two signing-time attributes | refuses | refuses | refuses | **accepts** | **accepts** | refuses | **accepts** | **accepts** |
@@ -42,5 +45,5 @@ Versions:
 - LibreSSL: LibreSSL 3.3.6 (macOS)
 - GnuTLS: GnuTLS 3.8.13 (certtool --p7-verify)
 - Java: OpenJDK 26.0.2.1 (sun.security.pkcs.PKCS7, as jarsigner)
-- .NET: .NET 10, System.Security.Cryptography.Pkcs 10.0.0 (SignedCms.CheckSignature)
+- .NET: .NET 10, System.Security.Cryptography.Pkcs 10.0.12 (SignedCms.CheckSignature)
 - Apple: macOS Security framework (CMSDecoder)

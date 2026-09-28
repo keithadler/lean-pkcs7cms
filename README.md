@@ -31,6 +31,7 @@ accepted that flaw. The full table is in [test/crosscheck/RESULTS.md](test/cross
 | Message | What happens |
 |---|---|
 | One detached signature whose signed attributes carry the SHA-256 of two documents, "Pay Alice $10." and "Pay Mallory $10,000." | **GnuTLS accepts the signature as valid for both documents.** RFC 5652 §11.2 allows one message-digest attribute; every other verifier refuses. |
+| A message signed normally, then its content type (`eContentType`, which the signature does not cover) changed by one byte, with no key | **OpenSSL, LibreSSL and .NET still accept it** and report the new type. RFC 5652 §11.1 requires the signed content-type attribute to match `eContentType`; that attribute is the only thing that authenticates it. OpenSSL writes the attribute when signing but never compares it when verifying. The same three accept a content-type attribute naming a timestamp (`TSTInfo`) on plain data, and the reverse. |
 | The signed attributes out of DER order | **The verifiers split two ways.** Signed over the bytes as written: OpenSSL, LibreSSL, Java, .NET and Apple accept, GnuTLS refuses. Signed over the sorted encoding: GnuTLS and .NET accept, the rest refuse. The same file is valid to one verifier and forged to another. |
 | No content-type attribute | LibreSSL, GnuTLS and .NET accept (RFC 5652 §5.3 requires it). |
 | A countersignature among the signed attributes | LibreSSL, GnuTLS, .NET and Apple accept (§11.4 forbids it). |

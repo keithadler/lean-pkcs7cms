@@ -104,6 +104,24 @@
    "msg": "ct-twice.der"
   },
   {
+   "id": "ct-mismatch",
+   "what": "content-type attribute says TSTInfo, the content is id-data",
+   "lean_expected": false,
+   "msg": "ct-mismatch.der"
+  },
+  {
+   "id": "relabeled-after-signing",
+   "what": "signed normally, then eContentType changed from id-data to 1.2.840.113549.1.7.5, with no key",
+   "lean_expected": false,
+   "msg": "relabeled-after-signing.der"
+  },
+  {
+   "id": "ct-mismatch-tst",
+   "what": "content-type attribute says id-data, the content is TSTInfo",
+   "lean_expected": false,
+   "msg": "ct-mismatch-tst.der"
+  },
+  {
    "id": "md-two-documents",
    "what": "detached: message-digests of two different documents, checked against the second",
    "lean_expected": false,
@@ -255,6 +273,18 @@
      "ok": false,
      "err": "content-type attribute"
     },
+    "ct-mismatch": {
+     "ok": false,
+     "err": "content-type attribute"
+    },
+    "relabeled-after-signing": {
+     "ok": false,
+     "err": "SignedData version 1, expected 3"
+    },
+    "ct-mismatch-tst": {
+     "ok": false,
+     "err": "content-type attribute"
+    },
     "md-two-documents": {
      "ok": false,
      "err": "message-digest attribute"
@@ -380,6 +410,18 @@
      "ok": false,
      "err": "803F02ED01000000:error:170000A1:CMS routines:ossl_cms_si_check_attributes:attribute error:crypto/cms/cms_att.c:268:"
     },
+    "ct-mismatch": {
+     "ok": true,
+     "err": ""
+    },
+    "relabeled-after-signing": {
+     "ok": true,
+     "err": ""
+    },
+    "ct-mismatch-tst": {
+     "ok": true,
+     "err": ""
+    },
     "md-two-documents": {
      "ok": false,
      "err": "803F02ED01000000:error:170000A1:CMS routines:ossl_cms_si_check_attributes:attribute error:crypto/cms/cms_att.c:268:"
@@ -502,6 +544,18 @@
      "err": ""
     },
     "ct-twice": {
+     "ok": true,
+     "err": ""
+    },
+    "ct-mismatch": {
+     "ok": true,
+     "err": ""
+    },
+    "relabeled-after-signing": {
+     "ok": true,
+     "err": ""
+    },
+    "ct-mismatch-tst": {
      "ok": true,
      "err": ""
     },
@@ -630,6 +684,18 @@
      "ok": false,
      "err": "Signature status: verification failed: Error in parsing."
     },
+    "ct-mismatch": {
+     "ok": false,
+     "err": "Signature status: verification failed: Error in parsing."
+    },
+    "relabeled-after-signing": {
+     "ok": false,
+     "err": "Signature status: verification failed: Error in parsing."
+    },
+    "ct-mismatch-tst": {
+     "ok": false,
+     "err": "Signature status: verification failed: Error in parsing."
+    },
     "md-two-documents": {
      "ok": true,
      "err": ""
@@ -755,6 +821,18 @@
      "ok": false,
      "err": "ParsingException: Unable to parse the encoded bytes"
     },
+    "ct-mismatch": {
+     "ok": false,
+     "err": "Exception: verify returned null"
+    },
+    "relabeled-after-signing": {
+     "ok": false,
+     "err": "Exception: verify returned null"
+    },
+    "ct-mismatch-tst": {
+     "ok": false,
+     "err": "Exception: verify returned null"
+    },
     "md-two-documents": {
      "ok": false,
      "err": "ParsingException: Unable to parse the encoded bytes"
@@ -810,7 +888,7 @@
    }
   },
   ".NET": {
-   "version": ".NET 10, System.Security.Cryptography.Pkcs 10.0.0 (SignedCms.CheckSignature)",
+   "version": ".NET 10, System.Security.Cryptography.Pkcs 10.0.12 (SignedCms.CheckSignature)",
    "verdicts": {
     "valid-attached": {
      "ok": true,
@@ -877,6 +955,18 @@
      "err": ""
     },
     "ct-twice": {
+     "ok": true,
+     "err": ""
+    },
+    "ct-mismatch": {
+     "ok": true,
+     "err": ""
+    },
+    "relabeled-after-signing": {
+     "ok": true,
+     "err": ""
+    },
+    "ct-mismatch-tst": {
      "ok": true,
      "err": ""
     },
@@ -1004,6 +1094,18 @@
     "ct-twice": {
      "ok": false,
      "err": "signer 0: status 3, result 0"
+    },
+    "ct-mismatch": {
+     "ok": false,
+     "err": "signer 0: status 3, result 0"
+    },
+    "relabeled-after-signing": {
+     "ok": false,
+     "err": "update -25257"
+    },
+    "ct-mismatch-tst": {
+     "ok": false,
+     "err": "signer 0: status 2, result 0"
     },
     "md-two-documents": {
      "ok": false,
